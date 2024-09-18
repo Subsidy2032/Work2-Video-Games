@@ -5,6 +5,7 @@ public class Collectable : MonoBehaviour
     public CollectableObjects collectableData;
     [SerializeField] string[] objects;
     [SerializeField] float[] scale;
+    [SerializeField] float[] colliderRadius;
 
     void Start()
     {
@@ -20,6 +21,12 @@ public class Collectable : MonoBehaviour
                     if (objects[i] == collectableData.target)
                     {
                         transform.localScale = new Vector3(scale[i], scale[i], 1f);
+
+                        CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
+                        if (circleCollider != null)
+                        {
+                            circleCollider.radius = colliderRadius[i];
+                        }
                     }
                 }
             }

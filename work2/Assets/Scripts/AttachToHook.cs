@@ -5,6 +5,7 @@ public class AttachToHook : MonoBehaviour
 {
     private bool isHooked = false;
     private Transform hookTransform;
+    private HookSwing hookSwing;
 
     public void Start()
     {
@@ -13,12 +14,13 @@ public class AttachToHook : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Detected collision");
         if (collision.gameObject.CompareTag("Hook"))
         {
-            Debug.Log("Detected collition with hook");
             isHooked = true;
             hookTransform = collision.transform;
+
+            hookSwing = FindObjectOfType<HookSwing>();
+            hookSwing.maxHookRetractY = collision.transform.position.y;
         }
     }
 

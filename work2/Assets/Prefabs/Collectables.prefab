@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7678895047215177081}
   m_Layer: 0
   m_Name: Collectables
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,6 +108,10 @@ MonoBehaviour:
   - 1
   - 0.2
   - 0.05
+  colliderRadius:
+  - 0.38
+  - 3.5
+  - 3.85
 --- !u!58 &-6102445166151881288
 CircleCollider2D:
   m_ObjectHideFlags: 0

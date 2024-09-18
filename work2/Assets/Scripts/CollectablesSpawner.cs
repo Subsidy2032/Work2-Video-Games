@@ -9,9 +9,8 @@ public class CollectablesSpawner : MonoBehaviour
     [SerializeField] GameObject spawnBound;
     [SerializeField] int amountToSpawn;
 
-    // Set a reasonable radius based on the size of your objects
     [SerializeField] float checkRadius = 0.5f;
-    [SerializeField] int maxAttempts = 10; // To avoid infinite loops
+    [SerializeField] int maxAttempts = 10;
 
     void Start()
     {
@@ -56,17 +55,15 @@ public class CollectablesSpawner : MonoBehaviour
                 Random.Range(y1, y2)
             );
 
-            // Check if the position is occupied by other objects
             Collider2D hitCollider = Physics2D.OverlapCircle(randomPosition, checkRadius);
             if (hitCollider == null)
             {
-                return randomPosition; // Valid position found
+                return randomPosition;
             }
 
             attemptCount++;
         }
 
-        // If max attempts are reached, return zero vector (indicates failure)
         return Vector2.zero;
     }
 
