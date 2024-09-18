@@ -6,14 +6,19 @@ public class AttachToHook : MonoBehaviour
     private bool isHooked = false;
     private Transform hookTransform;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public void Start()
     {
-        Debug.Log("Detected collition");
+        
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Detected collision");
         if (collision.gameObject.CompareTag("Hook"))
         {
             Debug.Log("Detected collition with hook");
             isHooked = true;
-            hookTransform = collision.transform; // Store the hook's transform
+            hookTransform = collision.transform;
         }
     }
 
@@ -21,7 +26,6 @@ public class AttachToHook : MonoBehaviour
     {
         if (isHooked && hookTransform != null)
         {
-            // Set the position of this object to be the same as the hook's position
             transform.position = hookTransform.position;
         }
     }

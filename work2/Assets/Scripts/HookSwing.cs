@@ -14,7 +14,7 @@ public class HookSwing : MonoBehaviour
 
     private float initShootingSpeed;
 
-    private float maxHookRetractY = -2.5f;
+    [SerializeField] float maxHookRetractY;
     private float initY;
 
     private bool isShooting;
