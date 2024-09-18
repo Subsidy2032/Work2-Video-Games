@@ -1,13 +1,9 @@
-using System.Drawing;
-using System.IO.IsolatedStorage;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CollectablesSpawner : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
     [SerializeField] CollectableObjects[] collectablesObjects;
-
     [SerializeField] float[] collectableProbability;
 
     [SerializeField] GameObject spawnBound;
@@ -24,24 +20,19 @@ public class CollectablesSpawner : MonoBehaviour
 
     void SpawnRandomCollectable()
     {
-
-
-
         Vector2 center = spawnBound.transform.position;
+        Vector2 size = spawnBound.GetComponent<SpriteRenderer>().bounds.size;
 
         Vector2 halfSize = size / 2;
-
-        // Calculate the boundary values
         float x1 = center.x - halfSize.x;
         float x2 = center.x + halfSize.x;
         float y1 = center.y - halfSize.y;
         float y2 = center.y + halfSize.y;
-    }
 
-    spawnBound.get
         Vector2 randomPosition = new Vector2(
-            Random.Range(spawnMinBounds.x, spawnMaxBounds.x),
-            Random.Range(spawnMinBounds.y, spawnMaxBounds.y) );
+            Random.Range(x1, x2),
+            Random.Range(y1, y2)
+        );
 
         GameObject newCollectable = Instantiate(prefab, randomPosition, Quaternion.identity);
 
@@ -52,21 +43,18 @@ public class CollectablesSpawner : MonoBehaviour
 
     CollectableObjects GetRandomCollectable()
     {
-        // Get a random value between 0 and 1
         float randomValue = Random.Range(0f, 1f);
+        float cumulativeProbability = 0f;
 
-        // Assign based on probabilities
-        if (randomValue < diamondProbability)
+        for (int i = 0; i < collectableProbability.Length; i++)
         {
-            return diamond;
+            cumulativeProbability += collectableProbability[i];
+            if (randomValue < cumulativeProbability)
+            {
+                return collectablesObjects[i];
+            }
         }
-        else if (randomValue < diamondProbability + coinProbability)
-        {
-            return coin;
-        }
-        else
-        {
-            return rock;
-        }
+
+        return collectablesObjects[collectablesObjects.Length - 1];
     }
 }
