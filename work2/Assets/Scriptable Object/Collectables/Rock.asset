@@ -15,4 +15,4 @@ MonoBehaviour:
   weight: 100
   points: -100
   target: Rock
-  sprite: {fileID: 21300000, guid: 0c6e851782f3b0c40aa3c206e46a97a5, type: 3}
+  collectableSprite: {fileID: 21300000, guid: 0c6e851782f3b0c40aa3c206e46a97a5, type: 3}

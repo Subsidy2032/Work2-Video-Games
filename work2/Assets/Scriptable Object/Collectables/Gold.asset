@@ -15,4 +15,4 @@ MonoBehaviour:
   weight: 30
   points: 100
   target: Gold
-  sprite: {fileID: 21300000, guid: 82b87637bd1384f41bcb48ddabd37ac2, type: 3}
+  collectableSprite: {fileID: 21300000, guid: c14bad3e70d35ed46beb09cd93497761, type: 3}

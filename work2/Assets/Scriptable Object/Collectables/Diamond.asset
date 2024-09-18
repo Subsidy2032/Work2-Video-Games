@@ -15,4 +15,4 @@ MonoBehaviour:
   weight: 10
   points: 500
   target: Diamond
-  sprite: {fileID: 21300000, guid: 74d0ba6cebed15f44ae2f8d60085ff28, type: 3}
+  collectableSprite: {fileID: 21300000, guid: 4a29252ccf10abf429c92040ff3ec69b, type: 3}
