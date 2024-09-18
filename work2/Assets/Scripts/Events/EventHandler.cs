@@ -3,7 +3,7 @@ using System;
 
 public class EventHandler : MonoBehaviour
 {
-    public static event Action<CollectableObjects> OnObjectCollected;
+    public static event Action<Collectable, CollectableObjects> OnObjectCollected;
 
     public static EventHandler Instance;
 
@@ -19,12 +19,8 @@ public class EventHandler : MonoBehaviour
         }
     }
 
-    public void CollectObject(CollectableObjects collectedObject)
+    public void CollectObject(Collectable collectable, CollectableObjects collectedObject)
     {
-        Debug.Log("Debug happend");
-        if (OnObjectCollected != null)
-        {
-            OnObjectCollected?.Invoke(collectedObject);
-        }
+        OnObjectCollected?.Invoke(collectable, collectedObject);
     }
 }

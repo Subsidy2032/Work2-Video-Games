@@ -12,7 +12,7 @@ public class CollectedTrigger : MonoBehaviour
 
             if (collectableData != null)
             {
-                EventHandler.Instance.CollectObject(collectableData);
+                EventHandler.Instance.CollectObject(collectableComponent, collectableData);
             }
         }
     }

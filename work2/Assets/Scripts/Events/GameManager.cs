@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreText; // Ensure this is assigned in the Inspector
+    [SerializeField] private TextMeshProUGUI scoreText;
     public int score = 0;
 
     private void OnEnable()
@@ -16,19 +16,12 @@ public class GameManager : MonoBehaviour
         EventHandler.OnObjectCollected -= HandleObjectCollected;
     }
 
-    private void HandleObjectCollected(CollectableObjects collectedObjects)
+    private void HandleObjectCollected(Collectable collectable, CollectableObjects collectedObjects)
     {
         score += collectedObjects.points;
         UpdateScoreText();
 
-        foreach (Collectable collectable in FindObjectsOfType<Collectable>())
-        {
-            if (collectable.collectableData == collectedObjects)
-            {
-                Destroy(collectable.gameObject);
-                break;
-            }
-        }
+        Destroy(collectable.gameObject);
     }
 
     private void UpdateScoreText()
