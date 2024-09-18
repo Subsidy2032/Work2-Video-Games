@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class CollectedTrigger : MonoBehaviour
 {
+    private EventHandler eventHandler = EventHandler.GetInstance();
     private void OnTriggerEnter2D(Collider2D other)
     {
-        CollectableObject collectableComponent = other.GetComponent<CollectableObject>();
+        Collectable collectableComponent = other.GetComponent<Collectable>();
 
         if (collectableComponent != null)
         {
+            Debug.Log("Entered");
             CollectableObjects collectableData = collectableComponent.collectableData;
 
             if (collectableData != null)
             {
-                if (EventHandler.Instance != null)
-                {
-                    EventHandler.Instance.CollectObject(collectableData);
-                }
+                Debug.Log("Not null");
+               eventHandler.CollectObject(collectableData);
             }
         }
     }

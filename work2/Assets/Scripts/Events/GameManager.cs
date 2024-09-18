@@ -1,7 +1,9 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI scoreText;
     public int score = 0;
 
     private void OnEnable()
@@ -17,7 +19,12 @@ public class GameManager : MonoBehaviour
     private void HandleObjectCollected(CollectableObjects collectedObjects)
     {
         score += collectedObjects.points;
-
+        UpdateScoreText();
         Destroy(collectedObjects);
+    }
+
+    private void UpdateScoreText()
+    {
+        scoreText.text = "Your Score: " + score;
     }
 }

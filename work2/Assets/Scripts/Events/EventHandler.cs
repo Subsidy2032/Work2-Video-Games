@@ -21,9 +21,15 @@ public class EventHandler : MonoBehaviour
 
     public void CollectObject(CollectableObjects collectedObject)
     {
+        Debug.Log("Debug happend");
         if (OnObjectCollected != null)
         {
-            OnObjectCollected.Invoke(collectedObject);
+            OnObjectCollected?.Invoke(collectedObject);
         }
+    }
+
+    public static EventHandler GetInstance()
+    {
+        return Instance;
     }
 }
