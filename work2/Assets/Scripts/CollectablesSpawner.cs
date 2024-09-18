@@ -36,9 +36,11 @@ public class CollectablesSpawner : MonoBehaviour
 
         GameObject newCollectable = Instantiate(prefab, randomPosition, Quaternion.identity);
 
+        Collectable collectable = newCollectable.GetComponent<Collectable>();
+
         CollectableObjects selectedCollectable = GetRandomCollectable();
 
-        newCollectable.GetComponent<Collectable>().collectableData = selectedCollectable;
+        collectable.collectableData = selectedCollectable;
     }
 
     CollectableObjects GetRandomCollectable()
