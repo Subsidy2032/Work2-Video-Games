@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI scoreText; // Ensure this is assigned in the Inspector
     public int score = 0;
 
     private void OnEnable()
@@ -18,13 +18,32 @@ public class GameManager : MonoBehaviour
 
     private void HandleObjectCollected(CollectableObjects collectedObjects)
     {
+        // Increment score based on points from the scriptable object
         score += collectedObjects.points;
         UpdateScoreText();
-        Destroy(collectedObjects);
+
+        // Loop through the scene to find the Collectable GameObject with matching collectable data
+        foreach (Collectable collectable in FindObjectsOfType<Collectable>())
+        {
+            // Check if this Collectable has the same CollectableObjects scriptable object
+            if (collectable.collectableData == collectedObjects)
+            {
+                // Destroy the GameObject that the Collectable script is attached to
+                Destroy(collectable.gameObject);
+                break; // Exit loop after destroying the object
+            }
+        }
     }
 
     private void UpdateScoreText()
     {
-        scoreText.text = "Your Score: " + score;
+        if (scoreText != null)
+        {
+            scoreText.text = "Your Score: " + score;
+        }
+        else
+        {
+            Debug.LogError("ScoreText is not assigned in the Inspector.");
+        }
     }
 }

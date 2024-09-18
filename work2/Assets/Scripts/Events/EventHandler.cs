@@ -27,9 +27,4 @@ public class EventHandler : MonoBehaviour
             OnObjectCollected?.Invoke(collectedObject);
         }
     }
-
-    public static EventHandler GetInstance()
-    {
-        return Instance;
-    }
 }
