@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ScoreText is not assigned in the Inspector.");
+            Debug.Log("No text object");
         }
     }
 }

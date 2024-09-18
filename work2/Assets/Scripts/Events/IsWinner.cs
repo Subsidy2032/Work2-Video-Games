@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Winner : MonoBehaviour
+public class IsWinner : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] TextMeshProUGUI goalText;

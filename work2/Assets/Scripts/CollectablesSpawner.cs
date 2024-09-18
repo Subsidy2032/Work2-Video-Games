@@ -30,10 +30,6 @@ public class CollectablesSpawner : MonoBehaviour
             CollectableObjects selectedCollectable = GetRandomCollectable();
             collectable.collectableData = selectedCollectable;
         }
-        else
-        {
-            Debug.LogWarning("Failed to find a valid spawn location after multiple attempts.");
-        }
     }
 
     Vector2 GetValidPosition()

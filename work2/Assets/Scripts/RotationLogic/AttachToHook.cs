@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class AttachToHook : MonoBehaviour
@@ -31,7 +30,7 @@ public class AttachToHook : MonoBehaviour
         if (collision.gameObject.CompareTag("Hook"))
         {
             isHooked = false;
-            hookSwing.maxHookRetractY = originalMaxHookRetractY; // Reset the value to original
+            hookSwing.maxHookRetractY = originalMaxHookRetractY;
         }
     }
 
