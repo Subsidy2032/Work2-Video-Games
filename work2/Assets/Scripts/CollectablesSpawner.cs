@@ -7,8 +7,11 @@ public class CollectablesSpawner : MonoBehaviour
     [SerializeField] float[] collectableProbability;
 
     [SerializeField] GameObject spawnBound;
-
     [SerializeField] int amountToSpawn;
+
+    // Set a reasonable radius based on the size of your objects
+    [SerializeField] float checkRadius = 0.5f;
+    [SerializeField] int maxAttempts = 10; // To avoid infinite loops
 
     void Start()
     {
@@ -20,6 +23,22 @@ public class CollectablesSpawner : MonoBehaviour
 
     void SpawnRandomCollectable()
     {
+        Vector2 randomPosition = GetValidPosition();
+        if (randomPosition != Vector2.zero)
+        {
+            GameObject newCollectable = Instantiate(prefab, randomPosition, Quaternion.identity);
+            Collectable collectable = newCollectable.GetComponent<Collectable>();
+            CollectableObjects selectedCollectable = GetRandomCollectable();
+            collectable.collectableData = selectedCollectable;
+        }
+        else
+        {
+            Debug.LogWarning("Failed to find a valid spawn location after multiple attempts.");
+        }
+    }
+
+    Vector2 GetValidPosition()
+    {
         Vector2 center = spawnBound.transform.position;
         Vector2 size = spawnBound.GetComponent<SpriteRenderer>().bounds.size;
 
@@ -29,18 +48,26 @@ public class CollectablesSpawner : MonoBehaviour
         float y1 = center.y - halfSize.y;
         float y2 = center.y + halfSize.y;
 
-        Vector2 randomPosition = new Vector2(
-            Random.Range(x1, x2),
-            Random.Range(y1, y2)
-        );
+        int attemptCount = 0;
+        while (attemptCount < maxAttempts)
+        {
+            Vector2 randomPosition = new Vector2(
+                Random.Range(x1, x2),
+                Random.Range(y1, y2)
+            );
 
-        GameObject newCollectable = Instantiate(prefab, randomPosition, Quaternion.identity);
+            // Check if the position is occupied by other objects
+            Collider2D hitCollider = Physics2D.OverlapCircle(randomPosition, checkRadius);
+            if (hitCollider == null)
+            {
+                return randomPosition; // Valid position found
+            }
 
-        Collectable collectable = newCollectable.GetComponent<Collectable>();
+            attemptCount++;
+        }
 
-        CollectableObjects selectedCollectable = GetRandomCollectable();
-
-        collectable.collectableData = selectedCollectable;
+        // If max attempts are reached, return zero vector (indicates failure)
+        return Vector2.zero;
     }
 
     CollectableObjects GetRandomCollectable()
