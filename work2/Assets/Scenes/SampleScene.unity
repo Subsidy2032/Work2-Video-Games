@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverText: {fileID: 1437621184}
   goalText: {fileID: 1323961023}
-  pointsToWin: 200
+  pointsToWin: 2000
 --- !u!4 &934783001
 Transform:
   m_ObjectHideFlags: 0
